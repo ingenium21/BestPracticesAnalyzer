@@ -14,7 +14,7 @@ Changelog:
 # Need to set some variables first....
 [string]$dt1    = (Get-Date -Format 'yyyy/MM/dd HH:mm')
 [string]$un     = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name.ToLower()
-[string]$server = gc c:\scripts\BPAnalyzer\servers.txt
+[string]$server = gc \servers.txt
 [string]$report = 'GEY Best practices model for Active Directory and DNS'
 
 Function Set-CellColour
@@ -58,7 +58,7 @@ Function Set-CellColour
                     {
                         If ($Row -eq $true) { $line = $line.Replace('<td>', ('<td style="background:{0};">' -f $Colour)) }
                         Else {
-                            [string[]]$arr = $line.Replace('><','>¦<').Split('¦')
+                            [string[]]$arr = $line.Replace('><','>Â¦<').Split('Â¦')
                             If ($arr[$index + 1].StartsWith('<td'))
                             {
                                 $arr[$index + 1] = $arr[$index + 1].Replace($search.Matches[$index].Value, ('<td style="background:{0};">{1}</td>' -f $Colour, $value))
@@ -116,10 +116,10 @@ Function Set-CellColour
 # LUN Geometry calculations
 
 #############declaring variables#################################
-$emailFrom = "aspireadmin@gentrylocke.com";
-$emailTo = "support-asp1@mindshift.com","lis.mote@mindshift.com","renato.regalado@mindshift.com","josh.quinn@mindshift.com","Dwayne.West@mindshift.com";
-$emailSubject = "Aspire Report - GEY Best Practices Analyzer for AD/DNS in $server";
-$smtpServer = "192.168.100.65";
+$emailFrom = {{email address}}
+$emailTo = {{email addresses}}
+$emailSubject = {{email subject}}
+$smtpServer = {{SMTP address}}
 $message = New-Object System.Net.Mail.MailMessage $emailFrom, $emailTo
 $message.subject = $emailSubject
 $message.IsBodyHTML = $true
